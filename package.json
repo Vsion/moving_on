@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Vsion/moving_on/issues"
   },
-  "homepage": "https://github.com/Vsion/moving_on#readme"
+  "homepage": "https://github.com/Vsion/moving_on#readme",
+  "devDependencies": {
+    "webpack": "^4.16.2"
+  }
 }
