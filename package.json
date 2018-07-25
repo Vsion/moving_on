@@ -1,0 +1,22 @@
+{
+  "name": "moving_on",
+  "version": "1.0.0",
+  "description": "test project",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "test command"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vsion/moving_on.git"
+  },
+  "author": "Vsion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vsion/moving_on/issues"
+  },
+  "homepage": "https://github.com/Vsion/moving_on#readme"
+}
