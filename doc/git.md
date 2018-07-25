@@ -2,14 +2,14 @@
 
 ## 提交代码
 git add .
-git commit -m '<message>'
+git commit -m '<_message>'
 git push
 
 ## 远程仓库添加
-git remote add upstream ~url
+git remote add upstream <_url>
 git remote -v
 
-git remote rename <upstream> <upstream_new>
+git remote rename <_upstream> <upstream_new>
 git remote -v
 
 ## 暂存 / 释放暂存
@@ -17,8 +17,8 @@ git stash
 git stash pop
 
 ## 获取远程仓库代码
-git fetch <upstream>
-git merge <upstream>/<branch_name>
+git fetch <_upstream>
+git merge <_upstream>/<branch_name>
 if (conflict){
   git stash
   git pull
