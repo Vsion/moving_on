@@ -1,48 +1,86 @@
 const path = require("path")
+const host = 'localhost'
 const port = 8008
-const publicPath = '/dist/'
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const webpack = require('webpack')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-module.exports = {
-  devtool: '#cheap-module-eval-source-map',
-  entry: './app.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: "bundle.js"
-  },
-  resolve: {
-    modules: [
-      path.join(__dirname, './src'),
-      'node_modules',
+module.exports = (env, argv) => {
+
+  const devMode = argv.mode !== 'production'
+  return {
+    devServer: {
+      host,
+      port,
+      hot: true,
+      // contentBase: __dirname + '/src'
+    },
+    devtool: '#cheap-module-eval-source-map',
+    entry: [
+      "babel-polyfill",
+      path.join(__dirname, '/src/entry/index.js')
     ],
-    extensions: [ '.js', '.jsx', '.json', '.ts', '.tsx' ],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: {
-          loader: "css-loader"
-        }
-      },
-      {
-        test: /(\.jsx|\.js)$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react', 'env', 'stage-0']
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: "[name].js",
+    },
+    resolve: {
+      modules: [
+        path.join(__dirname, './src'),
+        'node_modules',
+      ],
+      extensions: [ '.js', '.jsx', '.json', '.ts', '.tsx' ],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader'
+          ]
+        },
+        {
+          test: /\.less$/,
+          use: [
+              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader',
+              'less-loader',
+          ]
+        },
+        {
+          test: /(\.jsx|\.js)$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['react', 'env', 'stage-0']
+              }
+            },
+          ],
+          exclude: /node_modules/
+        },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {}
             }
-          },
-        ],
-        exclude: /node_modules/
-      }
+          ]
+        }
+      ]
+    },
+    node: {
+      fs: "empty"
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+      }),
+      new CleanWebpackPlugin(['dist']),
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
     ]
-  },
-  devServer: {
-    port,
-    publicPath,
-    contentBase: require('path').join(__dirname, "dist"),
-  },
+  }
 }

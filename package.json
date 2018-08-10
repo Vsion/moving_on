@@ -2,14 +2,15 @@
   "name": "moving_on",
   "version": "1.0.0",
   "description": "test project",
-  "main": "index.js",
+  "main": "app.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
     "test": "test command",
-    "run build": "webpack app.js --output-filename dist/bundle.js --output-path dist",
-    "dev": "node_modules/.bin/webpack --mode development",
+    "dev": "webpack-dev-server --config=webpack.config.js --mode development",
+    "server": "node app.js",
+    "build": "webpack --mode production --module-bind js=babel-loader",
     "start": "npm run dev"
   },
   "repository": {
@@ -23,22 +24,31 @@
   },
   "homepage": "https://github.com/Vsion/moving_on#readme",
   "devDependencies": {
-    "awesome-typescript-loader": "^5.2.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
+    "express": "^4.16.3",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "postcss-loader": "^2.1.6",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "style-loader": "^0.21.0",
     "thread-loader": "^1.1.5",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.1.3",
     "webpack-dev-server": "^3.1.5"
   }
 }
