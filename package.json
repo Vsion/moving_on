@@ -1,54 +1,32 @@
 {
-  "name": "moving_on",
+  "name": "test_webpack",
   "version": "1.0.0",
-  "description": "test project",
-  "main": "app.js",
-  "directories": {
-    "doc": "doc"
-  },
+  "description": "",
+  "private": true,
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
   "scripts": {
-    "test": "test command",
-    "dev": "webpack-dev-server --config=webpack.config.js --mode development",
-    "server": "node app.js",
-    "build": "webpack --mode production --module-bind js=babel-loader",
-    "start": "npm run dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vsion/moving_on.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open --hotOnly --mode development"
   },
   "author": "Vsion",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Vsion/moving_on/issues"
-  },
-  "homepage": "https://github.com/Vsion/moving_on#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "antd": "^3.8.0",
     "clean-webpack-plugin": "^0.1.19",
-    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
-    "express": "^4.16.3",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "less": "^3.8.0",
+    "less": "^3.8.1",
     "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "postcss-loader": "^2.1.6",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "style-loader": "^0.21.0",
-    "thread-loader": "^1.1.5",
-    "webpack": "^4.16.2",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
   }
 }

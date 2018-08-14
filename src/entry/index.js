@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
-import ReactDOM from "react-dom"
+import '../assets/less/index.less'
+import v from '../assets/image/v.jpg'
+import print from '../print'
 
-class Index extends React.Component {
-  render () {
-    return (
-      <div>
-        test
-      </div>
-    )
-  }
+document.body.appendChild((function() {
+  const a = document.createElement("div")
+  a.innerHTML = "test"
+  const img = document.createElement("img")
+  img.src = v
+  a.appendChild(img)
+  const btn = document.createElement("button")
+  btn.innerHTML = "print"
+  btn.onclick = print
+  a.appendChild(btn)
+  return a
+})())
+
+if (module.hot) {
+  module.hot.accept('../print.js', function() {
+    console.log('Accepting the updated print module!');
+    print();
+  })
 }
-
-ReactDOM.render(<Index />, document.getElementById("app"))
