@@ -1,23 +1,30 @@
-import '../assets/less/index.less'
-import v from '../assets/image/v.jpg'
-import print from '../print'
+import React from 'react';
+import ReactDom from 'react-dom'
+import { AppContainer } from 'react-hot-loader';
+import Index from '../components/index'
 
-document.body.appendChild((function() {
-  const a = document.createElement("div")
-  a.innerHTML = "test"
-  const img = document.createElement("img")
-  img.src = v
-  a.appendChild(img)
-  const btn = document.createElement("button")
-  btn.innerHTML = "print"
-  btn.onclick = print
-  a.appendChild(btn)
-  return a
-})())
+const renderCom = App => {
+  ReactDom.render(
+    <AppContainer>
+      <App />
+    </AppContainer>,
+    document.getElementById('app')
+  );
+}
+renderCom(Index)
+
+// if (module.hot) {
+//   module.hot.accept('../print.js', function() {
+//     console.log('Accepting the updated print module!')
+//     print()
+//   })
+// }
 
 if (module.hot) {
-  module.hot.accept('../print.js', function() {
-    console.log('Accepting the updated print module!');
-    print();
-  })
+  module.hot.accept(
+    '../components/index',() => {
+      const nextUpload = require('../components/index').default; // eslint-disable-line global-require
+      renderCom(nextUpload);
+    }
+  )
 }

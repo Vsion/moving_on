@@ -6,18 +6,20 @@ module.exports = {
   entry: {
     app: './src/entry/index.js',
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
   devtool: 'inline-source-map',
-  devServer: {
-    port: 8008,
-    contentBase: './dist',
-    hot: true,
-  },
   module: {
     rules: [
+      {
+        test: /\.(jsx|js)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-react']
+            }
+          }
+        ]
+      },
       {
         test: /\.css$/,
         use: [
@@ -30,7 +32,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'less-loader'
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            }
+          }
         ]
       },
       {
@@ -50,10 +57,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'test',
-      favicon: './V.ico'
+      favicon: './V.ico',
+      template: 'src/templates/index.html'
     }),
     new CleanWebpackPlugin(['dist']),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
   ]
 }
