@@ -1,5 +1,5 @@
-export function print(){
-  console.log("Updating print.js...!!")
+export function print(log){
+  console.log(log)
 }
 
 export function print2(){

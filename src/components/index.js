@@ -4,26 +4,24 @@ import '../assets/less/index.less'
 import v from '../assets/image/v.jpg'
 import { print } from '../print'
 
-// document.body.appendChild((function() {
-//   const a = document.createElement("div")
-//   a.innerHTML = "test"
-//   const img = document.createElement("img")
-//   img.src = v
-//   a.appendChild(img)
-//   const btn = document.createElement("button")
-//   btn.innerHTML = "print"
-//   btn.onclick = print
-//   a.appendChild(btn)
-//   // const obj = [ { a: 1 }, { b: 1 } ]
-//   // console.log(_.filter(obj, { a: 1 }))
-//   return a
-// })())
-
 class Index extends React.Component {
+  state = {
+    test: "test",
+    count: 0,
+  }
+  onClick = () => {
+    let { count, test } = this.state
+    this.setState({
+      count: ++count
+    }, () => {
+      print(test + count)
+    })
+  }
   render () {
+    const { test, count } = this.state
     return (
       <div className="main">
-        <Button onClick={() => alert("test")} >test</Button>
+        <Button onClick={this.onClick}>{test + count}</Button>
         <img src={v} />
         test
       </div>
@@ -31,6 +29,3 @@ class Index extends React.Component {
   }
 }
 export default Index
-// export default function a() {
-//   console.log(123)
-// }

@@ -2,9 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 module.exports = {
   entry: {
     app: './src/entry/index.js',
+  },
+  output: {
+    filename: '[name].bundle.js', // 打包后的文件名
+    path: path.resolve(__dirname, 'dist') // 打包出口，即打包后的文件会放在这个目录下
   },
   devtool: 'inline-source-map',
   module: {

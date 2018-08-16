@@ -1,36 +1,45 @@
+const webpack = require('webpack')
 const webpack_merge = require('webpack-merge')
 const base = require('./webpack.config.base')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')
 
+console.log("use production webpack config...")
+
 module.exports = webpack_merge(base, {
   mode: 'production',
-  output: {
-    filename: '[name].bundle.js', // 打包后的文件名
-    path: path.resolve(__dirname, 'dist') // 打包出口，即打包后的文件会放在这个目录下
-  },
   optimization: {
-    minimizer: true,
+    minimize: true,
+    // minimizer:
     // [
     //   new UglifyJsPlugin({
+    //     sourceMap: true,
     //     uglifyOptions: {
-    //       sourceMap: true,
-    //       comments: false,
-    //       unused: true,
-    //       dead_code: true,
+    //       compress: {
+    //         dead_code: true,
+    //         unused: true,
+    //       },
+    //       // output: {
+    //       //   comments: false,
+    //       // }
     //     }
     //   })
     // ]
   },
   plugins:[
-    // new CompressionPlugin({
-    //   asset: '[path].gz[query]',
-    //   algorithm: 'gzip',
-    //   test: new RegExp('\\.(js|css)$'),
-    //   threshold: 50240,
-    //   minRatio: 0.8
-    // }),
+    new UglifyJsPlugin({
+      sourceMap: true,
+      uglifyOptions: {
+        compress: {
+          dead_code: true,
+          unused: true,
+        },
+        // output: {
+        //   comments: false,
+        // }
+      }
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
   ]
 })
