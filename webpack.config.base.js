@@ -5,11 +5,23 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: './src/entry/index.js',
+    main: './src/entry/index.js',
+    // test: './src/entry/test.module.js',
+    vendor: [
+      'lodash',
+      'react',
+    ]
   },
   output: {
-    filename: '[name].bundle.js', // 打包后的文件名
+    filename: '[name].[chunkhash].js', // 打包后的文件名
     path: path.resolve(__dirname, 'dist') // 打包出口，即打包后的文件会放在这个目录下
+  },
+  resolve: {
+    modules: [
+      path.join(__dirname, './src'),
+      'node_modules',
+    ],
+    extensions: [ '.js', '.jsx', '.json', '.ts', '.tsx' ],
   },
   devtool: 'inline-source-map',
   module: {
@@ -59,13 +71,28 @@ module.exports = {
       }
     ]
   },
+  // optimization: {
+  //   splitChunks: {
+  //     name: 'manifest',
+  //     // cacheGroups: {
+  //     //   manifest: {
+  //     //     name: 'manifest',
+  //     //     minChunks: Infinity
+  //     //   }
+  //     // }
+  //   }
+  // },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'test',
+      title: 'test_project',
       favicon: './V.ico',
       template: 'src/templates/index.html'
     }),
     new CleanWebpackPlugin(['dist']),
     new webpack.NamedModulesPlugin(),
+    // new webpack.DllPlugin({
+    //   path: path.join(__dirname, './manifest.json'),
+    //   name: '[name].[chunkhash].js',
+    // }),
   ]
 }

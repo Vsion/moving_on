@@ -3,6 +3,8 @@ import { Button } from 'antd'
 import '../assets/less/index.less'
 import v from '../assets/image/v.jpg'
 import { print } from '../print'
+import _ from 'lodash'
+import testFunc from './test.module'
 
 class Index extends React.Component {
   state = {
@@ -15,7 +17,9 @@ class Index extends React.Component {
       count: ++count
     }, () => {
       print(test + count)
+      _.join(["test,", test, "count,", count])
     })
+    testFunc()
   }
   render () {
     const { test, count } = this.state
